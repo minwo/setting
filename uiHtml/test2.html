@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="apple-mobile-web-app-title" content="NAVER">
+    <meta name="robots" content="index,nofollow">
+    <meta name="description" content="">
+    <meta property="og:title" content=""> 
+    <meta property="og:url" content=""> 
+    <meta property="og:image" content=""> 
+    <meta property="og:description" content=""> 
+    <meta name="twitter:card" content="summary"> 
+    <meta name="twitter:title" content=""> 
+    <meta name="twitter:url" content=""> 
+    <meta name="twitter:image" content=""> 
+    <meta name="twitter:description" content=""> 
+    <link rel="stylesheet" href="/inc/css/reset.css">
+    <link rel="stylesheet" href="/inc/css/common.css">
+    <link rel="stylesheet" href="/inc/css/ui_content.css">
+    <script src="/inc/js/bn_common.js"></script>
+    <style>
+        .box {
+        width: 300px;
+        border: 1px solid #000;
+        margin: 10px;
+        cursor: pointer;
+        }
+        .toggle-container {
+        transition: height 0.35s ease-in-out;
+        overflow: hidden;
+        }
+        .toggle-container:not(.active) {
+        display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="js-toggle" data-container="toggle-1">Click</div>
+        <div class="toggle-container" id="toggle-1">I have an accordion and am animating the the height for a show reveal -
+            the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+            I have an accordion and am animating the the height fferent lengths.
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="js-toggle active" data-container="toggle-2">Click</div>
+        <div class="toggle-container open" id="toggle-2">I have an accordion and am animating the the height for a show
+            reveal - the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+            I have an accordion and am animating the the height fferent lengths.
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="js-toggle" data-container="toggle-3">Click</div>
+        <div class="toggle-container" id="toggle-3">I have an accordion and am animating the the height for a show reveal -
+            the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+            I have an accordion and am animating the the height fferent lengths.
+        </div>
+    </div>
+
+    <script>
+        var linkToggle = document.querySelectorAll('.js-toggle');
+
+        for (i = 0; i < linkToggle.length; i++) {
+
+            linkToggle[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                var container = document.getElementById(this.dataset.container);
+
+                if (!container.classList.contains('active')) {
+                    container.classList.add('active');
+                    container.style.height = 'auto';
+                    var height = container.clientHeight + 'px';
+                    console.log(height)
+                    container.style.height = '0px';
+                    setTimeout(function () {
+                        container.style.height = height;
+                    }, 0);
+                } else {
+                    container.style.height = '0px';
+                    container.addEventListener('transitionend', function () {
+                        container.classList.remove('active');
+                    }, {
+                        once: true
+                    });
+
+                }
+
+            });
+
+        }
+    </script>
+</body>
+</html>

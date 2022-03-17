@@ -2,6 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', function(){
     initUi.setup();
+
+    // mac os 일 경우 html 태그에 mac_os 클래스 붙임
+    if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+        $("html").addClass("mac_os");
+    }
 });
 
 // Avoid `console` errors in browsers that lack a console.
@@ -32,7 +37,8 @@ let initUi = (function(){
     let _inst;
 
     function setup(){
-        registUI('.ui-tab', uiSampleFn);
+        registUI('.ui-tab', uiTab);
+        registUI('.ui-accodion', uiAccodion);
     }
 
     function registUI(el, fn, saveData){
@@ -50,7 +56,7 @@ function getElIndex(element, range) {
     return [].indexOf.call(element.parentNode.children, element);
   }
 
-let uiSampleFn = function(){
+let uiTab = function(){
     let el, btnEl, layerEl, btnLength;
     let i, idx;
 
@@ -79,6 +85,45 @@ let uiSampleFn = function(){
                 }
                 this.classList.add('on');
                 layerEl[idx].classList.add('on');
+            });
+        });
+
+    }
+
+    return{init:init}
+}
+
+let uiAccodion = function(){
+    let el, btnEl, layerEl;
+    let i, layerLgt, dStyle;
+
+    const init = (_el) => {
+        el = document.querySelector(_el);
+        btnEl = el.querySelectorAll('.btn');
+        layerEl = el.querySelectorAll('.layer');
+
+        layerLgt = layerEl.length;
+
+        bindEvent();
+    }
+
+    const bindEvent = () => {
+        clickEvent();
+        setEvent();
+    }
+
+    const setEvent = () => {
+        dStyle = {
+            
+        }
+    }
+    
+    const clickEvent = () => {
+        [].forEach.call(btnEl, (e) => {
+            e.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                console.log(1)
             });
         });
 
