@@ -114,7 +114,7 @@ let uiAccodion = function(){
 
     const setEvent = () => {
         dStyle = {
-            
+
         }
     }
     
@@ -123,7 +123,7 @@ let uiAccodion = function(){
             e.addEventListener('click', (event) => {
                 event.preventDefault();
 
-                console.log(1)
+                console.log(133333)
             });
         });
 
