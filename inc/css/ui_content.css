@@ -1,17 +1,18 @@
 .ui-tab .tab-ctr .btn {
   float: left;
   display: block;
-  width: 100px;
-  height: 30px;
-  line-height: 30px;
+  width: 33.3%;
+  height: 50px;
+  line-height: 50px;
   font-size: 16px;
   text-align: center;
-  border: 1px solid #888;
-  border-radius: 5px;
+  border-bottom: 1px solid #8e44ad;
+  background: #ecf0f1;
 }
 
 .ui-tab .tab-ctr .btn.on {
-  background: #adadad;
+  color: #fff;
+  background: #9b59b6;
 }
 
 .ui-tab .tab-layer {
@@ -40,4 +41,11 @@
 
 .ui-accodion .layer {
   display: none;
+  overflow: hidden;
+  -webkit-transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+  transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.ui-accodion .layer .cont {
+  padding: 20px;
 }

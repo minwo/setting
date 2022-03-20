@@ -94,8 +94,8 @@ let uiTab = function(){
 }
 
 let uiAccodion = function(){
-    let el, btnEl, layerEl;
-    let i, layerLgt, dStyle;
+    let el, btnEl, layerEl, prevEl;
+    let idx, layerLgt, duration, layerHeight, elCheck;
 
     const init = (_el) => {
         el = document.querySelector(_el);
@@ -103,30 +103,46 @@ let uiAccodion = function(){
         layerEl = el.querySelectorAll('.layer');
 
         layerLgt = layerEl.length;
+        duration = 300;
 
         bindEvent();
     }
 
     const bindEvent = () => {
         clickEvent();
-        setEvent();
-    }
-
-    const setEvent = () => {
-        dStyle = {
-
-        }
     }
     
     const clickEvent = () => {
         [].forEach.call(btnEl, (e) => {
             e.addEventListener('click', (event) => {
+                prevEl = layerEl[idx];
                 event.preventDefault();
+                idx = getElIndex(btnEl, e);
+                elCheck = prevEl !== layerEl[idx] && prevEl !== undefined;
+                
+                if(!layerEl[idx].style.height){
+                    if(elCheck) remove(prevEl);
+                    
+                    layerEl[idx].style.display = 'block';
+                    layerHeight = layerEl[idx].clientHeight;
+                    layerEl[idx].style.height = '0';
+                    setTimeout(() => {
+                        layerEl[idx].style.height = layerHeight + "px";
+                    },);
 
-                console.log(133333)
+                } else {
+                    remove(layerEl[idx]);
+                }
+
             });
         });
 
+        const remove = (el) => {
+            el.style.height = '0';
+            setTimeout(() => {
+                el.style = null;
+            },duration);
+        }
     }
 
     return{init:init}
