@@ -1,68 +1,15 @@
-.ui-tab .tab-ctr .btn {
-  float: left;
-  display: block;
-<<<<<<< HEAD
-  width: 33.3%;
-  height: 50px;
-  line-height: 50px;
-  font-size: 16px;
-  text-align: center;
-  border-bottom: 1px solid #8e44ad;
-  background: #ecf0f1;
-}
+.ui-tab .tab-ctr .btn { float: left; display: block; width: 33.3%; height: 50px; line-height: 50px; font-size: 16px; text-align: center; border-bottom: 1px solid #8e44ad; background: #ecf0f1; }
 
-.ui-tab .tab-ctr .btn.on {
-  color: #fff;
-  background: #9b59b6;
-=======
-  width: 100px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #888;
-  border-radius: 5px;
-}
+.ui-tab .tab-ctr .btn.on { color: #fff; background: #9b59b6; }
 
-.ui-tab .tab-ctr .btn.on {
-  background: #adadad;
->>>>>>> 76cb367 (component추가)
-}
+.ui-tab .tab-layer { display: none; min-height: 300px; border: 1px solid #888; }
 
-.ui-tab .tab-layer {
-  display: none;
-  min-height: 300px;
-  border: 1px solid #888;
-}
+.ui-tab .tab-layer.on { display: block; }
 
-.ui-tab .tab-layer.on {
-  display: block;
-}
+.ui-accodion { border: 1px solid #888; }
 
-.ui-accodion {
-  border: 1px solid #888;
-}
+.ui-accodion .btn { display: block; height: 44px; padding-left: 5px; line-height: 44px; border-left: 8px solid  #ffc48b; background: #fff6ee; border-radius: 3px; }
 
-.ui-accodion .btn {
-  display: block;
-  height: 44px;
-  padding-left: 5px;
-  line-height: 44px;
-  border-left: 8px solid  #ffc48b;
-  background: #fff6ee;
-  border-radius: 3px;
-}
+.ui-accodion .layer { display: none; overflow: hidden; -webkit-transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1); transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1); }
 
-.ui-accodion .layer {
-  display: none;
-<<<<<<< HEAD
-  overflow: hidden;
-  -webkit-transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1);
-  transition: height 0.3s cubic-bezier(0.42, 0, 0.58, 1);
-}
-
-.ui-accodion .layer .cont {
-  padding: 20px;
-=======
->>>>>>> 76cb367 (component추가)
-}
+.ui-accodion .layer .cont { padding: 20px; }
