@@ -3,6 +3,21 @@
 document.addEventListener('DOMContentLoaded', function(){
     initUi.setup();
 
+    includeHTML();
+
+    function includeHTML(){
+        const includeArea = document.querySelectorAll('[data-include]');
+        console.log(includeArea)
+        for(let dom of includeArea){
+            console.log(dom.dataset.include)
+            const url = dom.dataset.include;
+            fetch(url).then(response => response.text()).then(data =>{
+                dom.innerHTML = data;
+                dom.removeAttribute('data-include');
+            });
+        }//for
+    }//includeHTML
+
     // mac os 일 경우 html 태그에 mac_os 클래스 붙임
     if (navigator.userAgent.indexOf('Mac OS X') != -1) {
         $("html").addClass("mac_os");
@@ -120,6 +135,7 @@ let uiAccodion = function(){
                 idx = getElIndex(btnEl, e);
                 elCheck = prevEl !== layerEl[idx] && prevEl !== undefined;
                 
+                console.log(window.getComputedStyle(layerEl[idx]).display)
                 if(!layerEl[idx].style.height){
                     if(elCheck) remove(prevEl);
                     
@@ -148,6 +164,8 @@ let uiAccodion = function(){
     return{init:init}
 }
 
+// scrollTop
+var _scrollTop = window.scrollY || document.documentElement.scrollTop;
 
 
 
