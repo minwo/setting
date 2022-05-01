@@ -1,17 +1,3 @@
-'use strict';
-
-document.addEventListener('DOMContentLoaded', function(){
-    includeHTML();
-    
-    initUi.setup();
-
-    // mac os 일 경우 html 태그에 mac_os 클래스 붙임
-    if (navigator.userAgent.indexOf('Mac OS X') != -1) {
-        document.querySelector('html').classList.add('mac_os');
-        // $("html").addClass("mac_os");
-    }
-});
-
 // Avoid `console` errors in browsers that lack a console.
 (function() {
 	var method;
@@ -35,7 +21,24 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 }());
 
-// multi function
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function(){
+    // 퍼블리싱 전용 (주의!!! 개발 완료시 모두 삭제)/////////////////////////////
+    if(location.port == '8888' || location.hostname.indexOf('www.naver.com') != -1){
+        includeHTML(); // 개발언어로 변경시 이 부분 삭제 해야 합니다. (개발언어로 인클루드 필요.)
+
+        // mac os 일 경우 html 태그에 mac_os 클래스 붙임
+        if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+            document.querySelector('html').classList.add('mac_os');
+            // $("html").addClass("mac_os");
+        }
+    }
+    
+    initUi.setup();
+
+});
+
 let initUi = (function(){
     let _inst;
 
@@ -63,8 +66,8 @@ function includeHTML(){
             dom.innerHTML = data;
             dom.removeAttribute('data-include');
         });
-    }//for
-}//includeHTML
+    }
+}
 
 function getElIndex(element, range) {
     if (!!range) return [].indexOf.call(element, range);
