@@ -165,36 +165,16 @@ let uiAccodion = function(){
 }
 
 // scrollTop
+
 document.addEventListener("scroll", function(){
     var _scrollTop = window.scrollY || document.documentElement.scrollTop;
+    console.log(_scrollTop)
 });
 
 
-const changeNav = (entries, observer) => {
-	entries.forEach((entry) => {
-        console.log(entry)
-		if(entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-			entry.target.classList.add('inview');
-		} else {
-            entry.target.classList.remove('inview');
-        }
-	});
-}
-
-const options = {
-	threshold: 0.55
-}
-
-const observer = new IntersectionObserver(changeNav, options);
 
 
-document.addEventListener('DOMContentLoaded', function(){
-    // target the elements to be observed
-    const sections = document.querySelectorAll('section');
-    sections.forEach((section) => {
-        observer.observe(section);
-    });
-});
+
 
 
 
