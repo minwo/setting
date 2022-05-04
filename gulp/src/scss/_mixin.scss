@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+// hide Text && bg icon
+@mixin commonHideTxt($bgImgW:null, $bgImgH:null) {
+	@if $bgImgW {
+		background-size:$bgImgW $bgImgH;
+		background-position:center center;
+		background-repeat:no-repeat;
+	}
+	overflow:hidden;
+	color:transparent;
+	font-size:1px;
+	text-indent:-9999px;
+}
+// slide Down && slide Up
+@mixin slideAnimate($mh, $mt, $ts, $tcb) {
+	max-height:$mh;
+	margin-top:$mt;
+	transition:all $ts $tcb;
+}
+
+// 텍스트 말줄임
+@mixin textEllipsis($line:1) {
+	overflow:hidden;
+	text-overflow:ellipsis;
+	@if $line > 1 {
+		display:-webkit-box;
+		-webkit-line-clamp:$line;
+		-webkit-box-orient:vertical;
+	}@else{
+		white-space:nowrap;
+	}
+}
+
+// button
+@mixin buttonType(
+	$border-color,
+	$background-color,
+	// $font-color:if($background-color == $light, $black, $white),
+	$font-color:$white,
+	$font-size:13px
+){
+	display:inline-flex;
+	justify-content:center;
+	align-items:center;
+	height:40px;
+	padding:0 20px;
+	border:1px solid $border-color;
+	background-color:$background-color;
+	color:$font-color;
+	font-size:$font-size;
+	&.disabled,
+	&:disabled {
+		border-color:$btn-disabled-bg;
+		background:$btn-disabled-bg;
+		color:$btn-disabled-color;
+		cursor: default;
+	}
+}
+
+// theme light or theme dark
+@mixin gc-theme($name) {
+	@media (prefers-color-scheme: #{$name}) {
+		@content;
+	}
+}
+
+// $delay : .4s;
+// $duration : .2s;
+
+@mixin d-ani($delay, $duration){
+    -webkit-transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    -ms-transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    -o-transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    -webkit-transition: transform $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    -ms-transition: transform $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    -o-transition: transform $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+    transition: transform $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
+}

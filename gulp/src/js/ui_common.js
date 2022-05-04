@@ -1,50 +1,27 @@
-// Avoid `console` errors in browsers that lack a console.
-(function() {
-	var method;
-	var noop = function () {};
-	var methods = [
-		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-		'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-		'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
-	];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-
-	while (length--) {
-		method = methods[length];
-
-		// Only stub undefined methods.
-		if (!console[method]) {
-			console[method] = noop;
-		}
-	}
-}());
-
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function(){
-    // 퍼블리싱 전용 (주의!!! 개발 완료시 모두 삭제)/////////////////////////////
-    if(location.port == '8888' || location.hostname.indexOf('www.naver.com') != -1){
-        includeHTML(); // 개발언어로 변경시 이 부분 삭제 해야 합니다. (개발언어로 인클루드 필요.)
-
-        // mac os 일 경우 html 태그에 mac_os 클래스 붙임
-        if (navigator.userAgent.indexOf('Mac OS X') != -1) {
-            document.querySelector('html').classList.add('mac_os');
-            // $("html").addClass("mac_os");
-        }
-    }
-    
     initUi.setup();
+
+    // mac os 일 경우 html 태그에 mac_os 클래스 붙임
+    if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+        document.querySelector('html').classList.add('mac_os');
+        // $("html").addClass("mac_os");
+    }
+});
+
+document.addEventListener('scroll', function(){
 
 });
 
+// multi function
 const initUi = (function(){
     let _inst;
 
     function setup(){
         registUI('.ui-tab', uiTab);
         registUI('.ui-accodion', uiAccodion);
+        registUI('.ui-swipe', swipeCom);
     }
 
     function registUI(el, fn, saveData){
@@ -56,18 +33,6 @@ const initUi = (function(){
 
     return{setup:setup}
 })();
-
-function includeHTML(){
-    const includeArea = document.querySelectorAll('[data-include]');
-    console.log(includeArea)
-    for(let dom of includeArea){
-        const url = dom.dataset.include;
-        fetch(url).then(response => response.text()).then(data =>{
-            dom.innerHTML = data;
-            dom.removeAttribute('data-include');
-        });
-    }
-}
 
 const getElIndex = (element, range) => {
     if (!!range) return [].indexOf.call(element, range);
@@ -173,7 +138,6 @@ const swipeCom = () => {
     const init = (_el) => {
         el = document.querySelectorAll(_el);
 
-
         bindEvent();
     }
 
@@ -216,7 +180,7 @@ document.addEventListener("scroll", function(){
     var _scrollTop = window.scrollY || document.documentElement.scrollTop;
 });
 
-
+// intersection observer
 const changeNav = (entries, observer) => {
 	entries.forEach((entry) => {
         console.log(entry)
@@ -241,40 +205,3 @@ document.addEventListener('DOMContentLoaded', function(){
         observer.observe(section);
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

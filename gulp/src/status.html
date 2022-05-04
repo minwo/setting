@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko-KR">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>SCSS 테스트 프로젝트</title>
+		<style type="text/css">
+			html, body {
+				margin:0;
+				padding:0;
+			}
+			html {
+				overflow-y:scroll;
+			}
+			body {
+				color:#666;
+				background-color:#fff;
+				font:12px/1.5 '맑은 고딕','Malgun Gothic','Apple-Gothic','애플고딕','돋움',Dotum,'굴림',Gulim,Helvetica,Arial, Sans-serif;
+			}
+			a {
+				color:#27e;
+				text-decoration:none;
+			}
+			a:focus,
+			a:hover,
+			a:active {
+				text-decoration:underline;
+			}
+			.header {
+				padding:2em;
+			}
+				.header h1 {
+					display:inline;
+					margin-right:1em;
+					color:#000;
+					font-size:2em;
+				}
+				.header ul {
+					display:inline;
+					font-size:1.5em;
+					list-style:none;
+				}
+				.header ul li {
+					display:inline;
+				}
+			.group-title {
+				margin-top:1em;
+				color:#000;
+				font-weight:bold;
+				font-size:1.5em;
+			}
+			table {
+				width:100%;
+				border-collapse:collapse;
+				border-spacing:0;
+			}
+				table caption {
+					display:none;
+				}
+				table tr td:first-child {
+					color:black;
+					font-weight:bold;
+				}
+				table th {
+					color:#333;
+					background-color:#eee;
+				}
+				table th,
+				table td {
+					padding:.5em;
+					border:1px solid #ddd;
+					text-align:left;
+				}
+				table th,
+				table td.stat,
+				table td.date {
+					text-align:center;
+				}
+				table tr.even,
+				table tr td.multi {
+					background-color:#fafafa;
+				}
+				table tr.add td {
+					background-color:#fd0;
+				}
+				table tr.modify td {
+					background-color:#fffeb4;
+				}
+				table tr.hover td {
+					background-color:#eee;
+				}
+			table tr.none td {
+				color:#000;
+				background-color:#fc8989;
+			}
+			table tr.up td {
+				background-color:#ffe9f5;
+			}
+				.section {
+					margin:3em 0;
+				}
+				body.js .section {
+					margin:0;
+				}
+					.section .title {
+						margin:0;
+						padding:0;
+						color:#000;
+						font-weight:bold;
+						font-size:100%;
+					}
+					body.js .section .title {
+						padding:1em;
+						border:1px solid #ccc;
+						background-color:#ddd;
+						cursor:pointer;
+					}
+					body.js .section + .section .title {
+						border-top:0;
+					}
+						body.js .section .title .page-count {
+							color:#666;
+							font-weight:normal;
+						}
+					body.js .section .content {
+						display:none;
+					}
+				#sb-body{border:none !important;}
+				.menu-list{position:fixed;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.7);padding:0;margin:0;}
+				.menu-list ul{display: table;table-layout: fixed;width: 100%;padding:0;margin:0;}
+				.menu-list li{list-style:none;display: table-cell;text-align:center;width: 50%;padding:0;margin:0;}
+				.menu-list li a{display:block;color:#fff;line-height:60px;padding:0;margin:0;font-size:13px;font-weight:bold;}
+				.menu-list li.btn{border-left:1px solid #fff;}
+				body .section:last-child{margin-bottom:100px;}
+		</style>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			(function ($) {
+				$.fn.stat = function (options) {
+					var settings = $.extend({
+							title: 'h2.title',
+							content: 'div.content',
+							files: 'tbody tr',
+							stat: 'td.stat',
+							index: 0,
+							openAll: false,
+							speed: 'fast'
+						}, options),
+						all_sections = this,
+						header = $('div.header');
+					return this.each(function () {
+						var self = this,
+							$self = $(self),
+							title_text = [],
+							completed = 0;
+						self.section_title = $(settings.title, $self);
+						self.content = $(settings.content, $self);
+						self.files = $(settings.files, $self);
+						self.files.each(function () {
+							var stat = $(settings.stat, this);
+							stat.each(function () {
+								var text = $(this).text();
+								if (text) {
+									completed++;
+								}
+							});
+						});
+						self.files
+							.bind('mouseenter', function () {
+								$(this).addClass('hover');
+							})
+							.bind('mouseleave', function () {
+								$(this).removeClass('hover');
+							});
+						title_text = [self.section_title.text(), ' <span class="page-count">(', completed, '/', self.files.length, ')</span>'];
+						self.section_title.html(title_text.join(''));
+						self.section_title.bind('click', function () {
+							self.content.slideToggle(settings.speed);
+						});
+						if (settings.openAll || ((settings.index - 1) === all_sections.index(this))) {
+							self.content.css('display', 'block');
+						}
+					});
+				};
+				$(document).ready(function () {
+					$('div.section').stat({ openAll: true });
+					$('#total').text($('tbody tr').length);
+					$('tbody tr:even').addClass('even');
+					$('tbody td[rowspan][rowspan!=1]').addClass('multi');
+				});
+			}(jQuery));
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">document.body.className += ' js';</script>
+		<div class="header">
+			<h1>SCSS 테스트 프로젝트</h1>
+		</div>
+		<div class="section" id="menu01" name="menu01">
+			<h2 class="title">TOTAL</h2>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">2depth</th>
+							<th scope="col">3depth</th>
+							<th scope="col">4depth</th>
+							<th scope="col">5depth</th>
+							<th scope="col">6depth</th>
+							<th scope="col">7depth</th>
+							<th scope="col">path</th>
+							<th scope="col">file</th>
+							<th scope="col">stat</th>
+							<th scope="col">date</th>
+							<th scope="col">note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>메인</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>/</td>
+							<td><a target="_blank" href="html/index.html">index.html</a></td>
+							<td class="stat">⚫</td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
