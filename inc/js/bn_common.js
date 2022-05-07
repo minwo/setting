@@ -45,6 +45,7 @@ const initUi = (function(){
     function setup(){
         registUI('.ui-tab', uiTab);
         registUI('.ui-accodion', uiAccodion);
+        registUI('.ui-swipe', swipeCom);
     }
 
     function registUI(el, fn, saveData){
@@ -171,8 +172,8 @@ const swipeCom = () => {
     let option, type;
 
     const init = (_el) => {
+        console.log(_el)
         el = document.querySelectorAll(_el);
-
 
         bindEvent();
     }
@@ -199,10 +200,10 @@ const swipeCom = () => {
                     },
                 }
             } else if ( type === 'sw-type02'){
-                option = {
+                option = Object.assing(option,{
                     speed: 1400,
                     direction: 'vertical'
-                }
+                });
             }
             swiper = new Swiper(e, option );
         });

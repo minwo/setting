@@ -65,9 +65,6 @@
 	}
 }
 
-// $delay : .4s;
-// $duration : .2s;
-
 @mixin d-ani($delay, $duration){
     -webkit-transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
     -ms-transition: opacity $delay cubic-bezier(0.645, 0.045, 0.355, 1) $duration;
